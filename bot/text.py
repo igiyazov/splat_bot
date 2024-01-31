@@ -25,6 +25,7 @@ class Language:
     TECH_ANSWER = 'tech_answer'
     INCORRECT_COMMAND = 'incorrect_command'
     BUTTON = 'button'
+    NAME = 'name'
 
 
 
@@ -64,6 +65,10 @@ LANGUAGE_TEXT = {
     Language.CONTACT_SHARE_MENU_2:{
         'ru': 'Ввести имя',
         'uz': 'Ismni kiritish'
+    },
+    Language.NAME: {
+        'ru': 'Введите ваше имя',
+        'uz': 'Ismingizni kiriting'
     },
     Language.ACQUAINTANCE: {
         'ru': 'Давайте познакомимся!\nПоделитесь вашим контактом или введите имя вручную.\n\nОбращаем ваше внимание - имя и фамилия должны соответствовать документам. В случае выигрыша приза, мы будем связываться с вами по введенным данным.',

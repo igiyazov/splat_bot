@@ -87,8 +87,9 @@ async def name(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if update.message.contact:
         user = await update_from_contact(update)
         return await language(update, context)
+    user_db = await get_user(update)
     await update.message.reply_text(
-        "Введите ваше имя"
+        get_text(Language.NAME, user_db.language)
     )
 
     return PHONE_NUMBER
@@ -252,8 +253,7 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await delete_media(media)
         return PHOTO_OR_INFO
 
-
-    await update.message.reply_text(
+    await update.message.reply_markdown(
         get_text(Language.SUCCESS, user_db.language),
         reply_markup=ReplyKeyboardMarkup(
             reply_keyboard, one_time_keyboard=True
