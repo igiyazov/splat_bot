@@ -23,6 +23,7 @@ class Check(BaseModel):
     lg = fields.CharField(max_length=150, unique=True, null=True)
     media = fields.ForeignKeyField('models.Media', related_name='media', null=True, on_delete=fields.SET_NULL)
 
+
 class Product(BaseModel):
     name = fields.CharField(max_length=150)
     count = fields.IntField()
