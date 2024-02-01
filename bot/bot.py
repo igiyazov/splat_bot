@@ -37,8 +37,8 @@ logger = logging.getLogger(__name__)
 LANGUAGE, PHOTO_OR_INFO, PHOTO, PROGRESS, CONTACT, PHONE_NUMBER, NAME, TECH = range(8)
 
 
-TOKEN = '6630982782:AAFJkEFJvpot1u2VrSjIWq3-xQMUbmhJJ5o' # test
-# TOKEN = '6797074619:AAEwFO66WB-WzT13_t6qG4x7c0V2ilVl86k'
+# TOKEN = '6630982782:AAFJkEFJvpot1u2VrSjIWq3-xQMUbmhJJ5o' # test
+TOKEN = '6797074619:AAEwFO66WB-WzT13_t6qG4x7c0V2ilVl86k'
 
 
 async def get_menu(update):

@@ -1,4 +1,4 @@
 restart:
 	git pull
 	docker-compose down
-	docker-compose up --build
+	docker-compose up --build -d
