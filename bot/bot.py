@@ -43,8 +43,8 @@ TOKEN = '6797074619:AAEwFO66WB-WzT13_t6qG4x7c0V2ilVl86k'
 
 async def get_menu(update):
     user_db = await get_user(update)
-    info_button = MenuButtonWebApp(get_text(Language.MENU_3, user_db.language), WebAppInfo(url="https://ya.ru/"))
-    rules_button = MenuButtonWebApp(get_text(Language.MENU_4, user_db.language), WebAppInfo(url="https://ya.ru/"))
+    info_button = MenuButtonWebApp(get_text(Language.MENU_3, user_db.language), WebAppInfo(url="https://uz.splatglobal.com/havas2024"))
+    rules_button = MenuButtonWebApp(get_text(Language.MENU_4, user_db.language), WebAppInfo(url="https://uz.splatglobal.com/havas2024/pravila"))
     MENU_BUTTONS = [[get_text(Language.MENU_1, user_db.language)], [get_text(Language.MENU_2, user_db.language)], [info_button], [rules_button]]
     return MENU_BUTTONS
 
