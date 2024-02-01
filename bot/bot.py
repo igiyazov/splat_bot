@@ -79,7 +79,6 @@ async def contact(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         )
     )
 
-
     return NAME
 
 
@@ -339,12 +338,19 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     pass
 
 
+async def restart(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_db = await get_user(update)
+    if user_db:
+        return await menu(update, context)
+    return await start(update, context)
+
+
 def main() -> None:
     application = Application.builder().token(TOKEN).build()
     application.add_handler(CommandHandler("help", menu))
 
     conv_handler = ConversationHandler(
-        entry_points=[CommandHandler("start", start), CommandHandler("restart", start)],
+        entry_points=[CommandHandler("start", start), CommandHandler("restart", restart)],
         states={
             NAME: [
                 MessageHandler(filters.CONTACT, name),
