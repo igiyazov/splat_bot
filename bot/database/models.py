@@ -6,7 +6,7 @@ from database.base import BaseModel
 class User(BaseModel):
     first_name = fields.CharField(max_length=150, null=True)
     last_name = fields.CharField(max_length=150, null=True)
-    username = fields.CharField(max_length=150)
+    username = fields.CharField(max_length=150, null=True)
     tg_id = fields.CharField(max_length=150, unique=True)
     phone_number = fields.CharField(max_length=150, null=True)
     language = fields.CharField(max_length=2, default='ru')
