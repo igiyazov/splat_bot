@@ -38,7 +38,8 @@ async def create_user_from_contact(update):
 async def set_user_first_name(update):
     user_db = await get_user(update)
     user_db.first_name = update.message.text
-    return await user_db.save()
+    await user_db.save()
+    return user_db
 
 
 async def set_user_phone(update):
