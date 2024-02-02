@@ -203,7 +203,7 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         )
         logger.info('OFD Error')
         await update.message.reply_markdown(
-            get_text(Language.CHECK_2, user_db.language),
+            get_text(Language.CHECK_7, user_db.language),
             reply_markup=ReplyKeyboardMarkup(
                 nosuccess_reply_keyboard, one_time_keyboard=True
             ),
@@ -293,7 +293,7 @@ async def tech(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     # TODO: send message
     # 1002127130018
     user = update.message.from_user
-    message_text = f"*Username*: @{user.username}\n*Datetime*: {update.message.date}\n*Language*: {user_db.language}\n*Text*: {update.message.text}"
+    message_text = f"*Username*: @{user.username}\n*TG_ID*: {user_db.tg_id}\n*Datetime*: {update.message.date}\n*Language*: {user_db.language}\n*Text*: {update.message.text}"
     await context.bot.send_message(
         chat_id='-1002127130018',
         text=message_text,

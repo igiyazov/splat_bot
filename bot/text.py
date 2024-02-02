@@ -19,6 +19,7 @@ class Language:
     CHECK_4 = 'check_4'
     CHECK_5 = 'check_5'
     CHECK_6 = 'check_6'
+    CHECK_7 = 'check_7'
     SUCCESS = 'success'
     LK = 'lk'
     TECH = 'tech'
@@ -138,6 +139,10 @@ LANGUAGE_TEXT = {
         'ru': 'Выберите действие',
         'uz': 'Kerakli tugmani tanlang'
     },
+    Language.CHECK_7: {
+        'ru': '❌ *База налоговой временно недоступен!*\n\n Попробуйте зарегистрировать чек позже.',
+        'uz': '❌ *Soliq qo\'mitasining bazasi vaqtinchalik ishlamayapti!*\n\n Keyinroq qayta urinib ko\'ring.'
+    }
 }
 
 
