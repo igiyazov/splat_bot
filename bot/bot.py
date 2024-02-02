@@ -158,6 +158,16 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         return TECH
     logger.info(f"URL: {result}")
 
+    if not result or not (type(result) is str):
+        await update.message.reply_markdown(
+            get_text(Language.CHECK_2, user_db.language),
+            reply_markup=ReplyKeyboardMarkup(
+                nosuccess_reply_keyboard, one_time_keyboard=True
+            ),
+        )
+        await delete_media(media)
+        return TECH
+
     match = re.search(r'^https://ofd\.soliq\.uz', result)
     if not match:
         await update.message.reply_markdown(
