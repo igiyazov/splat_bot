@@ -146,5 +146,5 @@ LANGUAGE_TEXT = {
 }
 
 
-def get_text(key, language):
+def get_text(key, language='ru'):
     return LANGUAGE_TEXT.get(key).get(language)
