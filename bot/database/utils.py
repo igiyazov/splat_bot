@@ -1,6 +1,9 @@
+import logging
 import os
 
 from database.models import User, Check, Product, Media
+
+from database.models import ExceptionModel
 
 
 async def get_or_create_user(user: dict, lang: str = None):
@@ -21,6 +24,7 @@ async def get_or_create_user(user: dict, lang: str = None):
         language=lang
     )
     return user
+
 
 async def create_user_from_contact(update):
     user = update.message.contact.to_dict()
@@ -106,6 +110,22 @@ async def create_check(check_id: str, user: dict, products: list, media: Media):
 
     return True, check, user
 
+async def create_check_errored(check_id: str, user: dict, products: list, media_id: str):
+    if await is_check_exists(check_id):
+        return False, None, None
+    user = await get_or_create_user(user)
+    media = await Media.filter(id=media_id).first()
+    # breakpoint()
+    check = await Check.create(
+        user=user,
+        lg=check_id,
+        media=media,
+    )
+    for product in products:
+        await create_product(check, product)
+
+    return True, check, user
+
 
 async def calculate_chance(user: User):
     all_checks = await Check.all().count()
@@ -120,3 +140,13 @@ async def get_checks_count(user: dict) -> int:
 
 async def get_products_count(user: dict) -> int:
     return await Product.filter(bill__user__tg_id=user.get("id")).count()
+
+
+async def create_exception(update, user, media: Media, type: ExceptionModel.ErrorTypes):
+    exception = await ExceptionModel.create(
+        user=user,
+        type=type,
+        media=media,
+        path=media.path,
+        user_tg=user.tg_id
+    )

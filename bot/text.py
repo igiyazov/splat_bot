@@ -27,6 +27,12 @@ class Language:
     INCORRECT_COMMAND = 'incorrect_command'
     BUTTON = 'button'
     NAME = 'name'
+    CHECK_ADDED = 'check_added'
+    ADDED_CHECK_SUCCESS = 'added_check_success'
+    TECH_ANSWER_1 = 'tech_answer_1'
+    TECH_ANSWER_2 = 'tech_answer_2'
+
+
 
 
 
@@ -112,7 +118,7 @@ LANGUAGE_TEXT = {
         'uz': '❌ *Afsuski, chek tekshiruvdan o‘tmadi!*\n\nUshbu chekdagi xarid aksiya o‘tkazilgan sanada amalga oshirilmagan.\nAksiya o‘tkazilgan sana: 1.02.2024 - 31.03.2024\n\n*02.01.2024* dan *31.03.2024* gacha bo‘lgan davr boshqa xarid chekini yuklang yoki qoʻllab-quvvatlash xizmati bilan bog‘laning👇'
     },
     Language.CHECK_6: {
-        'ru': '❌ *К сожалению, чек не прошел проверку!*\n\nДанные чек уже был зарегистрирован.\nЗагрузите другой чек или свяжитесь с поддержкой👇',
+        'ru': '❌ *К сожалению, чек не прошел проверку!*\n\nДанный чек уже был зарегистрирован.\nЗагрузите другой чек или свяжитесь с поддержкой👇',
         'uz': '❌ *Afsuski, chek tekshiruvdan o‘tmadi!*\n\nUshbu chek oldin ro‘yxatdan o‘tkazilgan.\nBoshqa chekni yuklang yoki qo‘llab-quvvatlash xizmati bilan bog‘laning👇'
     },
     Language.SUCCESS:{
@@ -132,16 +138,32 @@ LANGUAGE_TEXT = {
         'uz': '🙌 Bildirilgan fikr uchun rahmat!\nBiz sizga yaqin vaqt ichida javob beramiz.'
     },
     Language.INCORRECT_COMMAND:{
-        'ru': '*Неверная комманда!*',
-        'uz': '*Noto\'g\'ri!*'
+        'ru': '❌ *Неверная комманда!\n\nВыберите пункт из меню* 👇',
+        'uz': '❌ *Noto\'g\'ri!\n\nMenudan kerakli tugmani tanlang* 👇'
     },
     Language.BUTTON:{
-        'ru': 'Выберите действие',
-        'uz': 'Kerakli tugmani tanlang'
+        'ru': 'Выберите пункт из меню 👇',
+        'uz': 'Menudan kerakli tugmani tanlang 👇'
     },
     Language.CHECK_7: {
         'ru': '🙁 К сожалению, база налоговой временно недоступна. Мы проверим чек и отправим вам оповещение о проверке как только сайт станет доступен.',
         'uz': '❌ *Soliq qo\'mitasining bazasi vaqtinchalik ishlamayapti!*\n\n Keyinroq qayta urinib ko\'ring.'
+    },
+    Language.CHECK_ADDED: {
+        'ru': '🧾 Чек загружен!\n🧑‍💻Начинаем проверку чека…\n\nО результате проверки сообщим в этом чате в течение 24 часов 😊',
+        'uz': '🧾 Chek yuklandi!\n🧑‍💻Chekni tekshirishni boshlayapmiz...\n\nTekshiruv natijasi haqida sizga 24 soat ichida ushbu chat orqali xabar beramiz 😊'
+    },
+    Language.ADDED_CHECK_SUCCESS: {
+        'ru': 'Проверка чека завершена.\n\n✅ Поздравляем - ваш чек успешно зарегистрирован!',
+        'uz': 'Chekni tekshirish tugallandi.\n\n✅ Tabriklaymiz - chekingiz ro‘yxatdan muvaffaqiyatli o‘tkazildi!'
+    },
+    Language.TECH_ANSWER_1: {
+        'ru': '🧑‍💻 Решим все вопросы!\n\nКонтакты связи с тех. поддержкой: @splatuz_support\n\nНапишите ваш вопрос в личные сообщения по контактам указанным выше',
+        'uz': '🧑‍💻 Barcha masalalarni hal qilamiz!\n\nTexnik qo‘llab-quvvatlash xizmati bilan bog‘lanish: @splatuz_support\n\nSavolingizni yuqorida ko‘rsatilgan bog‘lanish manzillariga shaxsiy xabar orqali yozing'
+    },
+    Language.TECH_ANSWER_2: {
+        'ru': 'Для связи с тех. поддержкой необходимо обратиться по следующим контактам: @splatuz_support',
+        'uz': 'Texnik qo‘llab-quvvatlash xizmati bilan bog‘lanish uchun quyidagi bog‘lanish manzillariga murojaat qilish kerak: @splatuz_support'
     }
 }
 
