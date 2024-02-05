@@ -1,0 +1,68 @@
+version: '3.9'
+
+services:
+#  app:
+#    hostname: bot
+#    build:
+#      context: ..
+#      dockerfile: ../admin/Dockerfile
+#    restart: always
+#    ports:
+#      - "80:80"
+##    depends_on:
+##      postgres:
+##        condition: service_healthy
+#    environment:
+#      REDIS_URL: "redis://redis:6379/0"
+#      DATABASE_URL: "postgresql://doadmin:AVNS_ItZsZZbGehhcbgnddVP@db-postgresql-blr1-66051-do-user-15736215-0.c.db.ondigitalocean.com:25060/defaultdb?sslmode=require"
+
+  bot:
+    hostname: bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: python:3.9
+    restart: always
+#    deploy:
+#      mode: replicated
+#      replicas: 4
+#    env_file: ./.env
+#    entrypoint: 'python bot.py'
+    volumes:
+#      - ../../app:/core/app
+      - ./data/media:/app/media
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+
+#  redis:
+#    image: redis:latest
+#    restart: always
+#    ports:
+#      - "6379:6379"
+#    volumes:
+#      - ./data/redis_data:/root/redis
+#      - ./data/redis_data:/usr/local/etc/redis/redis.conf
+#    environment:
+#      - REDIS_PASSWORD=password
+#      - REDIS_PORT=6379
+#      - REDIS_DATABASES=16
+
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "bot"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    volumes:
+      - ./data/postgres_data:/var/lib/postgresql/data
