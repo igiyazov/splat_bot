@@ -212,10 +212,9 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     logger.info(page)
 
     try:
-        if DEBUG:
-            raise Exception('Workkk Exception')
         products, check_id, products_not_exist, incorrect_inn, incorrect_date = parse_products(page.text, result)
-    except:
+    except Exception as e:
+        logger.info(e)
         logger.info("Exception work")
         message_text = f"*Username*: BOT\n*Datetime*: {update.message.date}\n*Link*: {result}\n\n*Error*: Ofd не доступен"
         await context.bot.send_message(
@@ -535,6 +534,10 @@ async def checkallcheckserrors(update: Update, context: ContextTypes.DEFAULT_TYP
             caption=get_text(check.result, check.user_language),
             parse_mode=ParseMode.MARKDOWN,
         )
+
+    await update.message.reply_text(
+        f'Количество исправленных: {len(users_for_update_success) + len(users_for_update_errors)}\n\tУспешные - {len(users_for_update_success)}\n\tОшибочные - {len(users_for_update_errors)}'
+    )
 
 
 def main() -> None:

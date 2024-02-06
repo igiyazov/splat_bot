@@ -41,7 +41,10 @@ def parse_products(html_text, url):
     for row in soup.find_all('tr', class_='products-row'):
         children = row.find_all('td')
         name = children[0].text.strip()
-        count = int(children[1].text)
+        try:
+            count = int(children[1].text)
+        except:
+            count = float(children[1].text)
         if name in SPLAT_PRODUCTS:
             products.append({
                 'name': name,
