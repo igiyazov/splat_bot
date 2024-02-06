@@ -1,5 +1,3 @@
-import imutils as imutils
-from PIL import Image
 from qreader import QReader
 import cv2
 
