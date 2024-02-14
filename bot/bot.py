@@ -364,6 +364,23 @@ async def incorrect(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return PHOTO_OR_INFO
 
 
+async def incorrect_for_name(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_db = await get_user(update)
+    g = [[KeyboardButton(
+        get_text(Language.CONTACT_SHARE_MENU_1, user_db.language),
+        request_contact=True,
+        request_user=KeyboardButtonRequestUser(2),
+    ), get_text(Language.CONTACT_SHARE_MENU_2, user_db.language)]]
+
+    await update.message.reply_text(
+        get_text(Language.ACQUAINTANCE, user_db.language),
+        reply_markup=ReplyKeyboardMarkup(
+            g, one_time_keyboard=True
+        )
+    )
+    return NAME
+
+
 async def incorrect_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_db = await get_user(update)
     nosuccess_reply_keyboard = [[get_text(Language.REPLY_KEYBOARD_1, user_db.language)],
@@ -553,7 +570,7 @@ def main() -> None:
                 MessageHandler(filters.CONTACT, name),
                 MessageHandler(filters.Regex("^Ввести имя$"), name),
                 MessageHandler(filters.Regex("^Ismni kiritish$"), name),
-                MessageHandler(filters.ALL, incorrect)
+                MessageHandler(filters.ALL, incorrect_for_name)
             ],
             TECH: [
                 MessageHandler(filters.PHOTO, photo),

@@ -138,7 +138,7 @@ LANGUAGE_TEXT = {
         'uz': '🙌 Bildirilgan fikr uchun rahmat!\nBiz sizga yaqin vaqt ichida javob beramiz.'
     },
     Language.INCORRECT_COMMAND:{
-        'ru': '❌ *Неверная комманда!\n\nВыберите пункт из меню* 👇',
+        'ru': '❌ *Неверная команда!\n\nВыберите пункт из меню* 👇',
         'uz': '❌ *Noto\'g\'ri!\n\nMenudan kerakli tugmani tanlang* 👇'
     },
     Language.BUTTON:{
