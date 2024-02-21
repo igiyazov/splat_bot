@@ -1,7 +1,6 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from bot import menu
 
 
 def permission(func):
@@ -10,5 +9,4 @@ def permission(func):
         usernames = ['ruslan_tilyaev', 'ibrgyz']
         if user.get('username') and user.get('username') in usernames:
             return await func(update, context)
-        return await menu(update, context)
     return wrapped
