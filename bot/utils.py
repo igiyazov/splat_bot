@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from bot.bot import menu
+from bot import menu
 
 
 def permission(func):
