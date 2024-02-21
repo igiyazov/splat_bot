@@ -110,10 +110,11 @@ async def create_check(check_id: str, user: dict, products: list, media: Media):
 
     return True, check, user
 
-async def create_check_errored(check_id: str, user: dict, products: list, media_id: str):
+
+async def create_check_errored(check_id: str, user: User, products: list, media_id: str):
     if await is_check_exists(check_id):
         return False, None, None
-    user = await get_or_create_user(user)
+
     media = await Media.filter(id=media_id).first()
     # breakpoint()
     check = await Check.create(

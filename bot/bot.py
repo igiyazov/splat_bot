@@ -17,7 +17,8 @@ from telegram.ext import (
 )
 from tortoise import run_async
 
-from database.models import ExceptionModel
+from bot.utils import permission
+from database.models import ExceptionModel, User
 from text import get_text, Language
 from settings import ACTION_START_DATE, ACTION_END_DATE
 from database.utils import create_check, calculate_chance, get_checks_count, get_products_count, \
@@ -163,7 +164,6 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
                 nosuccess_reply_keyboard, one_time_keyboard=True
             ),
         )
-        await delete_media(media)
         return TECH
     logger.info(f"URL: {result}")
 
@@ -418,9 +418,7 @@ async def restart(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def checkallcheckserrors(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print("WOOOORK")
-    user_db = await get_user(update)
-    nosuccess_reply_keyboard = [[get_text(Language.REPLY_KEYBOARD_1, user_db.language)],
-                                [get_text(Language.MENU_5, user_db.language)]]
+    # user_db = await get_user(update)
     user = update.message.from_user.to_dict()
     error_checks = await ExceptionModel.filter(
         solved=False
@@ -428,6 +426,9 @@ async def checkallcheckserrors(update: Update, context: ContextTypes.DEFAULT_TYP
     users_for_update_errors = []
     users_for_update_success = []
     for check in error_checks:
+        user_db: User = await User.filter(id=check.user_id).first()
+        nosuccess_reply_keyboard = [[get_text(Language.REPLY_KEYBOARD_1, user_db.language)],
+                                    [get_text(Language.MENU_5, user_db.language)]]
         result, success = scan(check.path)
 
         if not success:
@@ -505,7 +506,8 @@ async def checkallcheckserrors(update: Update, context: ContextTypes.DEFAULT_TYP
             await check.save()
             continue
 
-        created, checkl, bot_user = await create_check_errored(check_id, user, products, check.media_id)
+
+        created, checkl, bot_user = await create_check_errored(check_id, user_db, products, check.media_id)
         if not created:
             check.result = Language.CHECK_6
             check.solved = True
@@ -522,33 +524,35 @@ async def checkallcheckserrors(update: Update, context: ContextTypes.DEFAULT_TYP
     # await ExceptionModel.bulk_update(users_for_update_success, fields=['solved', 'success'])
     # await ExceptionModel.bulk_update(users_for_update_errors, fields=['solved', 'result'])
 
-    success_button_text = get_text(Language.MENU_5, user_db.language)
-    error_button_text = get_text(Language.REPLY_KEYBOARD_2, user_db.language)
-    keyboard_success = [
-        [
-            InlineKeyboardButton(f"^{success_button_text}$", callback_data=success_button_text),
-        ]
-    ]
-
-    keyboard_error = [
-        [
-            InlineKeyboardButton(f"^{error_button_text}$", callback_data=error_button_text),
-        ]
-    ]
+    # success_button_text = get_text(Language.MENU_5, user_db.language)
+    # error_button_text = get_text(Language.REPLY_KEYBOARD_2, user_db.language)
+    # keyboard_success = [
+    #     [
+    #         InlineKeyboardButton(f"^{success_button_text}$", callback_data=success_button_text),
+    #     ]
+    # ]
+    #
+    # keyboard_error = [
+    #     [
+    #         InlineKeyboardButton(f"^{error_button_text}$", callback_data=error_button_text),
+    #     ]
+    # ]
 
     for check in users_for_update_success:
+        user_db: User = await User.filter(id=check.user_id).first()
         await context.bot.send_photo(
             chat_id=check.user_tg,
             photo=f'{check.path}',
-            caption=f"{get_text(Language.SUCCESS, check.user_language)}",
+            caption=f"{get_text(Language.SUCCESS, user_db.language)}",
             parse_mode=ParseMode.MARKDOWN
         )
     # breakpoint()
     for check in users_for_update_errors:
+        user_db: User = await User.filter(id=check.user_id).first()
         await context.bot.send_photo(
             chat_id=check.user_tg,
             photo=f'{check.path}',
-            caption=get_text(check.result, check.user_language),
+            caption=get_text(check.result, user_db.language),
             parse_mode=ParseMode.MARKDOWN,
         )
 
@@ -557,11 +561,21 @@ async def checkallcheckserrors(update: Update, context: ContextTypes.DEFAULT_TYP
     )
 
 
+@permission
+async def send_to_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(
+        chat_id='5378345330',
+        text="Assalomu aleykum! ❤️\n\nSiz haftalik tanlovimizda muzlatgich yutib oldingiz!\n\n🎉Lekin biz siz bilan bog'lana olmaymiz, chunki siz telefon raqamingizni ko'rsatmagansiz, iltimos, texnik yordam bo'limiga yozing - @splatuz_support va biz siz bilan bog'lanamiz 😊",
+        parse_mode=ParseMode.MARKDOWN
+    )
+
+
 def main() -> None:
     application = Application.builder().token(TOKEN).persistence(PostgresPersistence(url=DB_URL)).build()
 
     application.add_handler(CommandHandler("help", menu))
     application.add_handler(CommandHandler("checkallcheckserrors", checkallcheckserrors))
+    application.add_handler(CommandHandler("sendtousermessage", send_to_user_message))
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start), CommandHandler("restart", restart)],
