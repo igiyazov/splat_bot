@@ -17,7 +17,7 @@ from telegram.ext import (
 )
 from tortoise import run_async
 
-from bot.utils import permission
+from utils import permission
 from database.models import ExceptionModel, User
 from text import get_text, Language
 from settings import ACTION_START_DATE, ACTION_END_DATE
