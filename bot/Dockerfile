@@ -9,6 +9,7 @@ RUN pip install torch --no-cache-dir
 COPY ./ /app
 COPY ./migrations /app/bot/
 COPY ./media /app/bot/
+COPY ./video /app/bot/
 
 RUN pip install -r requirements.txt
 RUN chmod +x ./run.sh

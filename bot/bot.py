@@ -136,7 +136,7 @@ async def photo_or_info(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
 
     if not user_db.is_instruction_sended:
         await update.message.reply_video(
-            video=f'../video/{user_db.language}.MP4',
+            video=f'video/{user_db.language}.MP4',
             caption=get_text(Language.INSTRUCTION, user_db.language),
             reply_markup=ReplyKeyboardMarkup(
                 nosuccess_reply_keyboard, one_time_keyboard=True,
