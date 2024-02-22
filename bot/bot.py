@@ -130,9 +130,22 @@ async def language(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 
 async def photo_or_info(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    user_db = await get_user(update)
+    user_db: User = await get_user(update)
     nosuccess_reply_keyboard = [[get_text(Language.REPLY_KEYBOARD_1, user_db.language)],
                                 [get_text(Language.MENU_5, user_db.language)]]
+
+    if not user_db.is_instruction_sended:
+        await update.message.reply_video(
+            video=f'../video/{user_db.language}.MP4',
+            caption=get_text(Language.INSTRUCTION, user_db.language),
+            reply_markup=ReplyKeyboardMarkup(
+                nosuccess_reply_keyboard, one_time_keyboard=True,
+            ),
+        )
+        user_db.is_instruction_sended = True
+        await user_db.save()
+
+
     await update.message.reply_text(
         get_text(Language.CHECK_PHOTO_SEND, user_db.language),
         reply_markup=ReplyKeyboardMarkup(

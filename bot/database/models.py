@@ -12,6 +12,7 @@ class User(BaseModel):
     tg_id = fields.CharField(max_length=150, unique=True)
     phone_number = fields.CharField(max_length=150, null=True)
     language = fields.CharField(max_length=2, default='ru')
+    is_instruction_sended = fields.BooleanField(default=False)
 
 
 class Media(BaseModel):

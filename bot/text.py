@@ -31,6 +31,7 @@ class Language:
     ADDED_CHECK_SUCCESS = 'added_check_success'
     TECH_ANSWER_1 = 'tech_answer_1'
     TECH_ANSWER_2 = 'tech_answer_2'
+    INSTRUCTION = 'instruction'
 
 
 
@@ -164,6 +165,10 @@ LANGUAGE_TEXT = {
     Language.TECH_ANSWER_2: {
         'ru': 'Для связи с тех. поддержкой необходимо обратиться по следующим контактам: @splatuz_support',
         'uz': 'Texnik qo‘llab-quvvatlash xizmati bilan bog‘lanish uchun quyidagi bog‘lanish manzillariga murojaat qilish kerak: @splatuz_support'
+    },
+    Language.INSTRUCTION: {
+        'ru': 'Как зарегистрировать чек?\n\n1️⃣ Купите любой продукт SPLAT или BIOMED в магазинах Havas.\n\n2️⃣ Зарегистрируйте чек в этом телеграм боте @splatuz_bot\n\n3️⃣ Участвуйте в розыгрыше призов каждую неделю. 🎁',
+        'uz': 'Chekni qanday ro\'yxatdan o\'tkazish kerak?\n\n1️⃣ Har qanday SPLAT yoki BIOMED mahsulotlarini Havas do’konlaridan xarid qiling.\n\n2️⃣ Bizning telegram bot @splatuz_bot orqali chekni ro’yxatdan o’tkazing\n\n3️⃣ Har hafta sovrinlar o’yinida ishtirok eting. 🎁'
     }
 }
 
