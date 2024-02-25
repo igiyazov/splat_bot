@@ -577,7 +577,7 @@ async def checkallcheckserrors(update: Update, context: ContextTypes.DEFAULT_TYP
 @permission
 async def send_to_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
-        chat_id='5423623542',
+        chat_id='373533031',
         text="Assalomu aleykum! ❤️\n\nSiz haftalik tanlovimizda muzlatgich yutib oldingiz!\n\n🎉Lekin biz siz bilan bog'lana olmaymiz, chunki siz telefon raqamingizni ko'rsatmagansiz, iltimos, texnik yordam bo'limiga yozing - @splatuz_support va biz siz bilan bog'lanamiz 😊",
     )
 
