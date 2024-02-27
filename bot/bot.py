@@ -582,12 +582,49 @@ async def send_to_user_message(update: Update, context: ContextTypes.DEFAULT_TYP
     )
 
 
+@permission
+async def send_segmented_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+    TEXT1_RU = "Возможно, вас отвлекли? 🤔\n\nВы зарегистрировались в боте, но так и не стали участником акции 🎁\n\nЧтобы принять участие и получить возможность выиграть бытовую технику или поездку в Таиланд, выполните следующие шаги:\n\n1️⃣ Приобретите любой продукт SPLAT или Biomed в магазинах Havas.\n\n2️⃣ Отправьте полученный чек этому боту.\n\n3️⃣ Теперь вы участник акции! Розыгрыш призов каждую неделю 🎉\n\nНе упустите свой шанс, розыгрыш призов уже близко. Счастливчики прошлой недели уже получили свои подарки. Попробуйте удачу и вы! ❤️"
+    TEXT1_UZ = "Ehtimol, sizni chalg‘itishgandir? 🤔\n\nSiz botda ro‘yxatdan o‘tdingiz, lekin shunga qaramay aksiya ishtirokchisi bo‘lmadingiz 🎁\n\nIshtirok etish va maishiy texnika yoki Tailandga sayohat yutib olish imkoniyatiga ega bo‘lish uchun quyidagi harakatlarni bajaring:\n\n1️⃣ Istalgan SPLAT yoki Biomed mahsulotini Havas do‘konlaridan xarid qiling.\n\n2️⃣ Qabul qilingan chekni ushbu botga yuboring.\n\n3️⃣ Endi siz aksiya ishtirokchisiga aylandingiz! Sovrinlar har hafta o‘ynaladi 🎉\n\nImkoniyatingizni qo‘ldan boy bermang, sovrinlar yaqin kunlarda o‘ynaladi. O‘tgan haftaning omadli g‘oliblari sovg‘alarni ham olishdi. Siz ham omadingizni sinab ko'ring! ❤️"
+    TEXT2_RU = "Увеличивайте свои шансы на победу! 🤩\n\nНапоминаем, что чем больше продуктов вы зарегистрируете, тем больше шансов выиграть один из призов: холодильник, стиральная машина, кондиционер, телевизор или робот-пылесос.\n\nА также, в конце акции среди всех участников мы разыграем главный приз - поездку в Таиланд на двоих!\n\nРозыгрыш призов каждую неделю! 🎉"
+    TEXT2_UZ = "G‘alaba qozonish imkoniyatingizni oshiring! 🤩\n\nEslatib o‘tamiz, qancha ko‘p mahsulot ro‘yxatdan o‘tkazsangiz, muzlatgich, kir yuvish mashinasi, konditsioner, televizor yoki robot changyutgich kabi sovrinlardan birini yutib olish imkoniyati shunchalik yuqori bo‘ladi.\n\nShuningdek, aksiya yakunida biz barcha ishtirokchilar o‘rtasida bosh sovrin – Tailandga ikki kishilik sayohatni o‘ynaymiz!\n\nSovrinlar har hafta o‘ynaladi 🎉"
+
+
+    users = await User.all()
+
+    for user in users:
+        if await user.checks.all().exists():
+            if user.language == 'ru':
+                await context.bot.send_message(
+                    chat_id=user.tg_id,
+                    text=TEXT2_RU
+                )
+            elif user.language == 'uz':
+                await context.bot.send_message(
+                    chat_id=user.tg_id,
+                    text=TEXT2_UZ
+                )
+        else:
+            if user.language == 'ru':
+                await context.bot.send_message(
+                    chat_id=user.tg_id,
+                    text=TEXT1_RU
+                )
+            elif user.language == 'uz':
+                await context.bot.send_message(
+                    chat_id=user.tg_id,
+                    text=TEXT1_UZ
+                )
+
+
 def main() -> None:
     application = Application.builder().token(TOKEN).persistence(PostgresPersistence(url=DB_URL)).build()
 
     application.add_handler(CommandHandler("help", menu))
     application.add_handler(CommandHandler("checkallcheckserrors", checkallcheckserrors))
     application.add_handler(CommandHandler("sendtousermessage", send_to_user_message))
+    application.add_handler(CommandHandler("sendsegmentedmessage", send_segmented_messages))
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start), CommandHandler("restart", restart)],
