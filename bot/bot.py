@@ -594,28 +594,31 @@ async def send_segmented_messages(update: Update, context: ContextTypes.DEFAULT_
     users = await User.all()
 
     for user in users:
-        if await user.checks.all().exists():
-            if user.language == 'ru':
-                await context.bot.send_message(
-                    chat_id=user.tg_id,
-                    text=TEXT2_RU
-                )
-            elif user.language == 'uz':
-                await context.bot.send_message(
-                    chat_id=user.tg_id,
-                    text=TEXT2_UZ
-                )
-        else:
-            if user.language == 'ru':
-                await context.bot.send_message(
-                    chat_id=user.tg_id,
-                    text=TEXT1_RU
-                )
-            elif user.language == 'uz':
-                await context.bot.send_message(
-                    chat_id=user.tg_id,
-                    text=TEXT1_UZ
-                )
+        try:
+            if await user.checks.all().exists():
+                if user.language == 'ru':
+                    await context.bot.send_message(
+                        chat_id=user.tg_id,
+                        text=TEXT2_RU
+                    )
+                elif user.language == 'uz':
+                    await context.bot.send_message(
+                        chat_id=user.tg_id,
+                        text=TEXT2_UZ
+                    )
+            else:
+                if user.language == 'ru':
+                    await context.bot.send_message(
+                        chat_id=user.tg_id,
+                        text=TEXT1_RU
+                    )
+                elif user.language == 'uz':
+                    await context.bot.send_message(
+                        chat_id=user.tg_id,
+                        text=TEXT1_UZ
+                    )
+        except Exception:
+            pass
 
 
 def main() -> None:
