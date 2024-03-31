@@ -591,8 +591,8 @@ async def send_segmented_messages(update: Update, context: ContextTypes.DEFAULT_
     # TEXT2_UZ = "G‘alaba qozonish imkoniyatingizni oshiring! 🤩\n\nEslatib o‘tamiz, qancha ko‘p mahsulot ro‘yxatdan o‘tkazsangiz, muzlatgich, kir yuvish mashinasi, konditsioner, televizor yoki robot changyutgich kabi sovrinlardan birini yutib olish imkoniyati shunchalik yuqori bo‘ladi.\n\nShuningdek, aksiya yakunida biz barcha ishtirokchilar o‘rtasida bosh sovrin – Tailandga ikki kishilik sayohatni o‘ynaymiz!\n\nSovrinlar har hafta o‘ynaladi 🎉"
 
 
-    TEXT_UZ = "Ishtirok etishga shoshiling, negaki SPLAT va BIOMED aksiyasi tugashiga bir kun qoldi! 🌴\n\nTailandga chiptalar va uyingiz uchun maishiy texnika yutib olish imkoniyatini boy bermang! 😇\n\nHavas do‘konlaridan istalgan SPLAT yoki BIOMED mahsulotini xarid qiling, chekni @splatuz_bot telegram-botida ro‘yxatdan o‘tkazing va siz aksiya ishtirokchisisiz. 🎁"
-    TEXT_RU = "Спешите участвовать ведь остался один день до завершения акции от SPLAT и BIOMED! 🌴\n\nНе упустите шанс выиграть билеты в Таиланд и бытовую технику для вашего дома! 😇\n\nКупите любой продукт SPLAT или BIOMED в магазинах Havas, зарегистрируйте чек в телеграм боте @splatuz_bot и вы участник акции. 🎁"
+    TEXT_UZ = "Bugun SPLAT va BIOMED aksiyalari tugashining oxirgi kuni. Ishtirok etishga ulguring! 😍🏝️\n\nTailandga chiptalar va uyingiz uchun maishiy texnika yutib olish imkoniyatini boy bermang! 🤩\n\nHavas do‘konlarida istalgan SPLAT yoki BIOMED mahsulotini xarid qiling, chekni @splatuz_bot telegram-botida ro‘yxatdan o‘tkazing va siz aksiya ishtirokchisisiz. ❤️"
+    TEXT_RU = "Сегодня последний день до завершения акции от SPLAT и BIOMED. Успейте принять участие! 😍🏝️\n\nНе упустите шанс выиграть билеты в Таиланд и бытовую технику для вашего дома! 🤩\n\nКупите любой продукт SPLAT или BIOMED в магазинах Havas, зарегистрируйте чек в телеграм боте @splatuz_bot и вы участник акции. ❤️"
 
     users = await User.all()
     # breakpoint()
@@ -601,13 +601,13 @@ async def send_segmented_messages(update: Update, context: ContextTypes.DEFAULT_
         try:
             if user.language == 'ru':
                 await context.bot.send_photo(
-                    photo=open('ru1.jpg', 'rb'),
+                    photo=open('ru2.jpg', 'rb'),
                     chat_id=user.tg_id,
                     caption=TEXT_RU
                 )
             elif user.language == 'uz':
                 await context.bot.send_photo(
-                    photo=open('uz1.jpg', 'rb'),
+                    photo=open('uz2.jpg', 'rb'),
                     chat_id=user.tg_id,
                     caption=TEXT_UZ
                 )
