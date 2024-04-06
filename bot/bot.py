@@ -577,8 +577,16 @@ async def checkallcheckserrors(update: Update, context: ContextTypes.DEFAULT_TYP
 @permission
 async def send_to_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
-        chat_id='373533031',
-        text="Assalomu aleykum! ❤️\n\nSiz haftalik tanlovimizda muzlatgich yutib oldingiz!\n\n🎉Lekin biz siz bilan bog'lana olmaymiz, chunki siz telefon raqamingizni ko'rsatmagansiz, iltimos, texnik yordam bo'limiga yozing - @splatuz_support va biz siz bilan bog'lanamiz 😊",
+        chat_id='6382065476',
+        text="Здравствуйте Кулдаш! ❤️\n\nВы выиграли телевизор в нашем еженедельном конкурсе! 🎉 \n\nНо мы не можем с вами связаться, так как вы не указали номер телефона, пожалуйста напишите нам в тех поддержку - @splatuz_support и мы с вами свяжемся 😊",
+    )
+    await context.bot.send_message(
+        chat_id='6785658843',
+        text="Здравствуйте У́личка! ❤️\n\nВы выиграли кондиционер в нашем еженедельном конкурсе! 🎉 \n\nНо мы не можем с вами связаться, так как вы не указали номер телефона, пожалуйста напишите нам в тех поддержку - @splatuz_support и мы с вами свяжемся 😊",
+    )
+    await context.bot.send_message(
+        chat_id='1251951939',
+        text="Здравствуйте Salimaа! ❤️\n\nВы выиграли стиральную машинку в нашем еженедельном конкурсе! 🎉 \n\nНо мы не можем с вами связаться, так как вы не указали номер телефона, пожалуйста напишите нам в тех поддержку - @splatuz_support и мы с вами свяжемся 😊",
     )
 
 
@@ -591,8 +599,8 @@ async def send_segmented_messages(update: Update, context: ContextTypes.DEFAULT_
     # TEXT2_UZ = "G‘alaba qozonish imkoniyatingizni oshiring! 🤩\n\nEslatib o‘tamiz, qancha ko‘p mahsulot ro‘yxatdan o‘tkazsangiz, muzlatgich, kir yuvish mashinasi, konditsioner, televizor yoki robot changyutgich kabi sovrinlardan birini yutib olish imkoniyati shunchalik yuqori bo‘ladi.\n\nShuningdek, aksiya yakunida biz barcha ishtirokchilar o‘rtasida bosh sovrin – Tailandga ikki kishilik sayohatni o‘ynaymiz!\n\nSovrinlar har hafta o‘ynaladi 🎉"
 
 
-    TEXT_UZ = "Bugun SPLAT va BIOMED aksiyalari tugashining oxirgi kuni. Ishtirok etishga ulguring! 😍🏝️\n\nTailandga chiptalar va uyingiz uchun maishiy texnika yutib olish imkoniyatini boy bermang! 🤩\n\nHavas do‘konlarida istalgan SPLAT yoki BIOMED mahsulotini xarid qiling, chekni @splatuz_bot telegram-botida ro‘yxatdan o‘tkazing va siz aksiya ishtirokchisisiz. ❤️"
-    TEXT_RU = "Сегодня последний день до завершения акции от SPLAT и BIOMED. Успейте принять участие! 😍🏝️\n\nНе упустите шанс выиграть билеты в Таиланд и бытовую технику для вашего дома! 🤩\n\nКупите любой продукт SPLAT или BIOMED в магазинах Havas, зарегистрируйте чек в телеграм боте @splatuz_bot и вы участник акции. ❤️"
+    TEXT_UZ = "🗓 7-aprel kuni soat 13:00 da @splat.uz sahifasida SPLAT va BIOMED aksiyalarining asosiy sovrini bo'lib o'tadi!\n\nAksiyaning asosiy g‘olibi jonli efirda aniqlanadi. @thetraveltime.uz dan Tailandga ikki kishilik sayohat o'sha insonga nasib etadi🏖✈️\n\n📌 Sovrinlar oʻyini 1-fevraldan 31-martgacha boʻlgan vaqt davomida, Havas doʻkonlaridan xarid qilingan Splat va Biomed mahsulotlari uchun xarid chekini roʻyxatdan oʻtkazgan ishtirokchilar oʻrtasida oʻtkaziladi.\n\n🤩 Shuningdek, jonli efir ichida ishtirokchilarga SPLAT va BIOMED mahsulotlarining 5 ta to'plamini sovg'a qilamiz. 🎁\n\nSovrinni o'tkazib yubormang, ehtimol, aynan siz Tailandga ta'tilga ketadigan omadlilardan bo'lishingiz mumkin. 🇹🇭\n\nAksiya hamkorlari: @texnomart @thetraveltime.uz"
+    TEXT_RU = "🗓 7 апреля в 13:00 в прямом эфире на странице @splat.uz состоится главный розыгрыш акции от SPLAT и BIOMED!\n\nВ прямом эфире определится главный победитель акции. Который получит путевку в Таиланд на двоих от @thetraveltime.uz🏖✈️\n\n📌 Розыгрыш призов будет проводиться среди участников, зарегистрировавших чеки покупок продукции Splat и Biomed, приобретенных в магазинах Havas, в период проведения акции с 1 февраля по 31 марта.\n\n🤩 А также разыграем 5 наборов продукции от SPLAT и BIOMED среди участников эфира. 🎁\n\nНе пропустите розыгрыш, возможно, именно вы станете тем самым счастливчиком, который отправится в отпуск в Таиланд. 🇹🇭\n\nПартнеры акции: @texnomart @thetraveltime.uz"
 
     users = await User.all()
     # breakpoint()
@@ -601,13 +609,13 @@ async def send_segmented_messages(update: Update, context: ContextTypes.DEFAULT_
         try:
             if user.language == 'ru':
                 await context.bot.send_photo(
-                    photo=open('ru2.jpg', 'rb'),
+                    photo=open('ru3.jpg', 'rb'),
                     chat_id=user.tg_id,
                     caption=TEXT_RU
                 )
             elif user.language == 'uz':
                 await context.bot.send_photo(
-                    photo=open('uz2.jpg', 'rb'),
+                    photo=open('uz3.jpg', 'rb'),
                     chat_id=user.tg_id,
                     caption=TEXT_UZ
                 )
